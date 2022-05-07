@@ -3,6 +3,8 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../onboarding/onboarding_widget.dart';
+import '../page/event_page.dart';
+import '../page/homepages.dart';
 import '../signup/signup_widget.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
@@ -183,7 +185,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 await Navigator.pushAndRemoveUntil(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => OnboardingWidget(),
+                                    builder: (context) => HomePage(),
                                   ),
                                   (r) => false,
                                 );

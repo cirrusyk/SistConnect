@@ -10,6 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../page/event_page.dart';
+import '../page/homepages.dart';
+
 class SignupWidget extends StatefulWidget {
   const SignupWidget({Key key}) : super(key: key);
 
@@ -371,7 +374,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                             await Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => OnboardingWidget(),
+                                builder: (context) => HomePage(),
                               ),
                             );
                           },

@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:sistconnect/page/homepages.dart';
 import 'auth/firebase_user_provider.dart';
 import 'auth/auth_util.dart';
 
@@ -10,6 +11,8 @@ import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'index.dart';
+import 'page/event_page.dart';
+import 'page/tutor_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -89,7 +92,7 @@ class _MyAppState extends State<MyApp> {
               ),
             )
           : currentUser.loggedIn
-              ? OnboardingWidget()
+              ? HomePage()
               : LoginWidget(),
     );
   }
