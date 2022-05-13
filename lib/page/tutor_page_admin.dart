@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:sistconnect/flutter_flow/flutter_flow_widgets.dart';
 import 'package:sistconnect/page/tutor_create.dart';
+import 'package:sistconnect/page/tutoring_admin.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import 'tutoring.dart';
 
-class TutorPage extends StatefulWidget {
-  const TutorPage({Key key}) : super(key: key);
+class TutorPageAdmin extends StatefulWidget {
+  const TutorPageAdmin({Key key}) : super(key: key);
 
   @override
-  State<TutorPage> createState() => _TutorPageState();
+  State<TutorPageAdmin> createState() => _TutorPageAdminState();
 }
 
-class _TutorPageState extends State<TutorPage> {
+class _TutorPageAdminState extends State<TutorPageAdmin> {
   @override
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: const Color.fromRGBO(19, 22, 41, 1),
@@ -55,22 +56,22 @@ class _TutorPageState extends State<TutorPage> {
                     ),
                   ),
                 ),
-                Tutors(
+                TutorsAdmin(
                     title: "Science",
                     date: "25 Dec - 26 Nov",
                     description:
                         "Lorem ipsum is a name for a common type of placeholder text. Also known as filler or dummy text, this is simply text copy that serves to fill a space without actually saying anything meaningful. It's essentially nonsense text that still gives an idea of what real words will look like in the final product."),
-                Tutors(
+                TutorsAdmin(
                     title: "Math",
                     date: "25 Dec - 26 Nov",
                     description:
                         "Lorem ipsum is a name for a common type of placeholder text. Also known as filler or dummy text, this is simply text copy that serves to fill a space without actually saying anything meaningful. It's essentially nonsense text that still gives an idea of what real words will look like in the final product."),
-                Tutors(
+                TutorsAdmin(
                     title: "Physical",
                     date: "25 Dec - 26 Nov",
                     description:
                         "Lorem ipsum is a name for a common type of placeholder text. Also known as filler or dummy text, this is simply text copy that serves to fill a space without actually saying anything meaningful. It's essentially nonsense text that still gives an idea of what real words will look like in the final product."),
-                Tutors(
+                TutorsAdmin(
                     title: "Home Edu",
                     date: "25 Dec - 26 Nov",
                     description:

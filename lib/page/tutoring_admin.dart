@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 
-class Tutors extends StatefulWidget {
+import '../flutter_flow/flutter_flow_theme.dart';
+import '../flutter_flow/flutter_flow_widgets.dart';
+
+class TutorsAdmin extends StatefulWidget {
   final String title;
   final String date;
   final String description;
 
-  const Tutors({Key key, this.title, this.date, this.description})
+  const TutorsAdmin({Key key, this.title, this.date, this.description})
       : super(key: key);
 
   @override
-  State<Tutors> createState() => _TutorsState();
+  State<TutorsAdmin> createState() => _TutorsAdminState();
 }
 
-class _TutorsState extends State<Tutors> {
+class _TutorsAdminState extends State<TutorsAdmin> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -24,7 +27,7 @@ class _TutorsState extends State<Tutors> {
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
-            //crossAxisAlignment: CrossAxisAlignment,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
                 padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
@@ -72,7 +75,29 @@ class _TutorsState extends State<Tutors> {
                     textAlign: TextAlign.justify,
                   )),
               Container(
-                margin: const EdgeInsets.fromLTRB(0, 0, 0, 30),
+                margin: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 10),
+                child: FFButtonWidget(
+                  onPressed: () {},
+                  text: 'Delete Event',
+                  options: FFButtonOptions(
+                    height: 40,
+                    color: Color(0x77FF3F3F),
+                    textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                          fontFamily: 'Mulish',
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w300,
+                        ),
+                    borderSide: BorderSide(
+                      color: Colors.transparent,
+                      width: 1,
+                    ),
+                    borderRadius: 50,
+                  ),
+                ),
               ),
             ],
           ),

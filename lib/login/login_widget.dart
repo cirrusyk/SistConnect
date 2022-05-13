@@ -1,3 +1,5 @@
+import 'package:sistconnect/page/homepagesAdmin.dart';
+
 import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -180,15 +182,23 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 );
                                 if (user == null) {
                                   return;
+                                } else if (user.email == 'admin@admin.com') {
+                                  await Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => HomePageAdmin(),
+                                    ),
+                                    (r) => false,
+                                  );
+                                } else {
+                                  await Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => HomePage(),
+                                    ),
+                                    (r) => false,
+                                  );
                                 }
-
-                                await Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => HomePage(),
-                                  ),
-                                  (r) => false,
-                                );
                               },
                               text: 'Login',
                               options: FFButtonOptions(

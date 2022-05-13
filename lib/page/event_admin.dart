@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 
-class Event extends StatefulWidget {
+import '../flutter_flow/flutter_flow_theme.dart';
+import '../flutter_flow/flutter_flow_widgets.dart';
+import 'event_create.dart';
+
+class EventAdmin extends StatefulWidget {
   final String title;
   final String date;
   final String image;
   final String description;
 
-  const Event({
+  const EventAdmin({
     Key key,
     this.title,
     this.date,
@@ -15,10 +19,10 @@ class Event extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<Event> createState() => _EventState();
+  State<EventAdmin> createState() => _EventAdminState();
 }
 
-class _EventState extends State<Event> {
+class _EventAdminState extends State<EventAdmin> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -84,7 +88,29 @@ class _EventState extends State<Event> {
                   textAlign: TextAlign.justify,
                 )),
             Container(
-              margin: const EdgeInsets.fromLTRB(0, 0, 0, 30),
+              margin: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
+              child: FFButtonWidget(
+                onPressed: () {},
+                text: 'Delete Event',
+                options: FFButtonOptions(
+                  height: 40,
+                  color: Color(0x77FF3F3F),
+                  textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                        fontFamily: 'Mulish',
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w300,
+                      ),
+                  borderSide: BorderSide(
+                    color: Colors.transparent,
+                    width: 1,
+                  ),
+                  borderRadius: 50,
+                ),
+              ),
             ),
           ],
         ));

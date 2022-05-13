@@ -1,16 +1,13 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
-import '../flutter_flow/flutter_flow_util.dart';
+
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../login/login_widget.dart';
-import '../onboarding/onboarding_widget.dart';
+
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-import '../page/event_page.dart';
 import '../page/homepages.dart';
 
 class SignupWidget extends StatefulWidget {
@@ -366,6 +363,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                               password: passwordTextController.text,
                               displayName: fullnameTextController.text,
                               major: majorTextController.text,
+                              role: 'user',
                             );
                             await UsersRecord.collection
                                 .doc(user.uid)

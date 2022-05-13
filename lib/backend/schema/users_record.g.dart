@@ -75,6 +75,13 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.role;
+    if (value != null) {
+      result
+        ..add('role')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.reference;
     if (value != null) {
       result
@@ -129,6 +136,10 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
           result.major = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'role':
+          result.role = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
         case 'Document__Reference__Field':
           result.reference = serializers.deserialize(value,
                   specifiedType: const FullType(
@@ -160,6 +171,8 @@ class _$UsersRecord extends UsersRecord {
   @override
   final String major;
   @override
+  final String role;
+  @override
   final DocumentReference<Object> reference;
 
   factory _$UsersRecord([void Function(UsersRecordBuilder) updates]) =>
@@ -174,6 +187,7 @@ class _$UsersRecord extends UsersRecord {
       this.createdTime,
       this.phoneNumber,
       this.major,
+      this.role,
       this.reference})
       : super._();
 
@@ -196,6 +210,7 @@ class _$UsersRecord extends UsersRecord {
         createdTime == other.createdTime &&
         phoneNumber == other.phoneNumber &&
         major == other.major &&
+        role == other.role &&
         reference == other.reference;
   }
 
@@ -207,13 +222,17 @@ class _$UsersRecord extends UsersRecord {
                 $jc(
                     $jc(
                         $jc(
-                            $jc($jc($jc(0, email.hashCode), password.hashCode),
-                                displayName.hashCode),
-                            photoUrl.hashCode),
-                        uid.hashCode),
-                    createdTime.hashCode),
-                phoneNumber.hashCode),
-            major.hashCode),
+                            $jc(
+                                $jc(
+                                    $jc($jc(0, email.hashCode),
+                                        password.hashCode),
+                                    displayName.hashCode),
+                                photoUrl.hashCode),
+                            uid.hashCode),
+                        createdTime.hashCode),
+                    phoneNumber.hashCode),
+                major.hashCode),
+            role.hashCode),
         reference.hashCode));
   }
 
@@ -228,6 +247,7 @@ class _$UsersRecord extends UsersRecord {
           ..add('createdTime', createdTime)
           ..add('phoneNumber', phoneNumber)
           ..add('major', major)
+          ..add('role', role)
           ..add('reference', reference))
         .toString();
   }
@@ -268,6 +288,10 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
   String get major => _$this._major;
   set major(String major) => _$this._major = major;
 
+  String _role;
+  String get role => _$this._role;
+  set role(String role) => _$this._role = role;
+
   DocumentReference<Object> _reference;
   DocumentReference<Object> get reference => _$this._reference;
   set reference(DocumentReference<Object> reference) =>
@@ -288,6 +312,7 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
       _createdTime = $v.createdTime;
       _phoneNumber = $v.phoneNumber;
       _major = $v.major;
+      _role = $v.role;
       _reference = $v.reference;
       _$v = null;
     }
@@ -317,6 +342,7 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
             createdTime: createdTime,
             phoneNumber: phoneNumber,
             major: major,
+            role: role,
             reference: reference);
     replace(_$result);
     return _$result;

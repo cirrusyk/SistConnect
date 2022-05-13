@@ -1,25 +1,28 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sistconnect/page/profile.dart';
+import 'package:sistconnect/page/profile_admin.dart';
 import 'package:sistconnect/page/tutor_page.dart';
+import 'package:sistconnect/page/tutor_page_admin.dart';
 import '../auth/auth_util.dart';
 import '../login/login_widget.dart';
 import 'event_page.dart';
+import 'event_page_admin.dart';
 import 'events.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key key}) : super(key: key);
+class HomePageAdmin extends StatefulWidget {
+  const HomePageAdmin({Key key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomePageAdmin> createState() => _HomePageAdminState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageAdminState extends State<HomePageAdmin> {
   int _currentIndex = 0;
+
   final screens = [
-    const EventPage(),
-    const TutorPage(),
-    const ProfileUser(),
+    const EventPageAdmin(),
+    const TutorPageAdmin(),
+    const Profile(),
   ];
   @override
   Widget build(BuildContext context) => Scaffold(
