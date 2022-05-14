@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'events.dart';
+import 'package:sistconnect/backend/storage_service.dart';
+import 'package:sistconnect/model/events.dart';
 
 class EventForm extends StatefulWidget {
   const EventForm({Key key}) : super(key: key);
@@ -18,6 +20,7 @@ class _EventFormState extends State<EventForm> {
 
   @override
   Widget build(BuildContext context) {
+    final Storage storage = Storage();
     return Scaffold(
       backgroundColor: const Color.fromRGBO(19, 22, 41, 1),
       appBar: AppBar(
@@ -52,20 +55,44 @@ class _EventFormState extends State<EventForm> {
               ),
               Container(
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-                child: TextField(
-                  controller: controllerImage,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue, width: 2.0),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white, width: 2.0),
-                    ),
-                    labelText: 'Image',
-                    labelStyle: TextStyle(
-                      color: Colors.white,
-                    ),
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    padding:
+                        MaterialStateProperty.all(const EdgeInsets.all(18)),
+                    alignment: Alignment.centerLeft,
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        Color.fromRGBO(19, 22, 41, 1)),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                            side: BorderSide(color: Colors.white, width: 2.0))),
+                  ),
+                  onPressed: () async {
+                    final results = await FilePicker.platform.pickFiles(
+                      allowMultiple: false,
+                      type: FileType.custom,
+                      allowedExtensions: ['png', 'jpg'],
+                    );
+                    if (results == null) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                            'No file selected.',
+                          ),
+                        ),
+                      );
+                      return null;
+                    }
+                    final path = results.files.single.path;
+                    final fileName = results.files.single.name;
+
+                    storage
+                        .uploadFile(path, fileName)
+                        .then((value) => print('Done'));
+                  },
+                  child: Text(
+                    'Upload image',
+                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.w400),
                   ),
                 ),
               ),
@@ -114,7 +141,7 @@ class _EventFormState extends State<EventForm> {
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                 child: ElevatedButton(
                     onPressed: () {
-                      final events = Event(
+                      final events = Events(
                         title: controllerTitle.text,
                         date: controllerDate.text,
                         description: controllerDescription.text,
@@ -122,7 +149,7 @@ class _EventFormState extends State<EventForm> {
                       );
                       Navigator.pop(context);
 
-                      // createEvents(events);
+                      createEvents(events);
                     },
                     style: ElevatedButton.styleFrom(
                       primary: const Color.fromRGBO(120, 121, 241, 1),
@@ -140,11 +167,12 @@ class _EventFormState extends State<EventForm> {
       ),
     );
   }
-  // Future createEvents(Events events) async{
-  //   final docEvent = FirebaseFirestore.instance.collection("events").doc();
-  //   events.id = docEvent.id;
-  //
-  //   final json = events.toJson();
-  //   await docEvent.set(json);
-  // }
+
+  Future createEvents(Events events) async {
+    final docEvent = FirebaseFirestore.instance.collection("events").doc();
+    events.id = docEvent.id;
+
+    final json = events.toJson();
+    await docEvent.set(json);
+  }
 }

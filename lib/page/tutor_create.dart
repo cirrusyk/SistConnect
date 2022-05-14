@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:sistconnect/page/tutoring.dart';
+
+import '../model/tutor.dart';
 
 class TutorForm extends StatefulWidget {
   const TutorForm({Key key}) : super(key: key);
@@ -93,13 +94,13 @@ class _TutorFormState extends State<TutorForm> {
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                 child: ElevatedButton(
                     onPressed: () {
-                      final tutor = Tutors(
+                      final tutor = Tutor(
                           title: controllerTitle.text,
                           date: controllerDate.text,
                           description: controllerDescription.text);
                       Navigator.pop(context);
 
-                      // createTutoring(tutor);
+                      createTutoring(tutor);
                     },
                     style: ElevatedButton.styleFrom(
                       primary: const Color.fromRGBO(120, 121, 241, 1),
@@ -118,11 +119,11 @@ class _TutorFormState extends State<TutorForm> {
     );
   }
 
-  // Future createTutoring(Tutors tutor) async{
-  //   final docTutoring = FirebaseFirestore.instance.collection("tutoring").doc();
-  //   tutor.id = docTutoring.id;
-  //
-  //   final json = tutor.toJson();
-  //   await docTutoring.set(json);
-  // }
+  Future createTutoring(Tutor tutor) async {
+    final docTutoring = FirebaseFirestore.instance.collection("tutoring").doc();
+    tutor.id = docTutoring.id;
+
+    final json = tutor.toJson();
+    await docTutoring.set(json);
+  }
 }
