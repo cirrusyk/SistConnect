@@ -53,49 +53,27 @@ class _EventFormState extends State<EventForm> {
                   ),
                 ),
               ),
-              Container(
-                padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    padding:
-                        MaterialStateProperty.all(const EdgeInsets.all(18)),
-                    alignment: Alignment.centerLeft,
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        Color.fromRGBO(19, 22, 41, 1)),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5.0),
-                            side: BorderSide(color: Colors.white, width: 2.0))),
-                  ),
-                  onPressed: () async {
-                    final results = await FilePicker.platform.pickFiles(
-                      allowMultiple: false,
-                      type: FileType.custom,
-                      allowedExtensions: ['png', 'jpg'],
-                    );
-                    if (results == null) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text(
-                            'No file selected.',
-                          ),
-                        ),
-                      );
-                      return null;
-                    }
-                    final path = results.files.single.path;
-                    final fileName = results.files.single.name;
-
-                    storage
-                        .uploadFile(path, fileName)
-                        .then((value) => print('Done'));
-                  },
-                  child: Text(
-                    'Upload image',
-                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.w400),
-                  ),
-                ),
-              ),
+              // Container(
+              //   padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+              //   child: ElevatedButton(
+              //     style: ButtonStyle(
+              //       padding:
+              //           MaterialStateProperty.all(const EdgeInsets.all(18)),
+              //       alignment: Alignment.centerLeft,
+              //       backgroundColor: MaterialStateProperty.all<Color>(
+              //           Color.fromRGBO(19, 22, 41, 1)),
+              //       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              //           RoundedRectangleBorder(
+              //               borderRadius: BorderRadius.circular(5.0),
+              //               side: BorderSide(color: Colors.white, width: 2.0))),
+              //     ),
+              //
+              //     child: Text(
+              //       'Upload image',
+              //       style: TextStyle(fontSize: 17, fontWeight: FontWeight.w400),
+              //     ),
+              //   ),
+              // ),
               Container(
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                 child: TextField(
@@ -140,12 +118,34 @@ class _EventFormState extends State<EventForm> {
               Container(
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                 child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
+                      final results = await FilePicker.platform.pickFiles(
+                        allowMultiple: false,
+                        type: FileType.custom,
+                        allowedExtensions: ['png', 'jpg'],
+                      );
+                      if (results == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text(
+                              'No file selected.',
+                            ),
+                          ),
+                        );
+                        return null;
+                      }
+                      final path = results.files.single.path;
+                      final fileName = results.files.single.name;
+
+                      storage
+                          .uploadFile(path, fileName)
+                          .then((value) => print('Done'));
+
                       final events = Events(
                         title: controllerTitle.text,
                         date: controllerDate.text,
                         description: controllerDescription.text,
-                        image: controllerImage.text,
+                        image: path,
                       );
                       Navigator.pop(context);
 
